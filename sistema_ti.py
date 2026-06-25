@@ -1,3 +1,6 @@
+import os
+
+Arquivo_dados_txt = "ocorrencias.txt"
 lista_geral = []       
 insercao_fila_chegada = []      
 registro_pilha_historico = []   
@@ -44,10 +47,10 @@ def cadastrar_ocorrencia():
         
        
         indice = calcular_hash(tipo)
-        # Adiciona a ocorrência na tabela hash
+        
         tabela_hash_tipo[indice].append(ocorrencia)
         
-        # empilha a descrição no histórico
+        
         registro_pilha_historico.append(f"Cadastro da ocorrência ID {id}")
 
         print(f" Chamado ID {id} enviado com sucesso!")
@@ -66,7 +69,7 @@ def listar_ocorrencias():
         print(f"Descrição: {occ['descricao']} | Status: {occ['status']}")
         
 
-# remove o primeiro chamado que entrou no sistema e altera o  status
+
 def ordem_chegada():
     print("\nATENDIMENTO POR ORDEM DE CHEGADA")
     
@@ -101,7 +104,7 @@ def buscar_por_tipo_hash():
     if not encontrados:
         print(f"Nenhum chamado encontrado para o tipo '{tipo_busca}'.")
 
-# utilizei o bublle sort para ordenar por id 
+
 def ordenar_ocorrencias():
     print("\nORDENAÇÃO POR ID")
     if not lista_geral:
@@ -113,11 +116,16 @@ def ordenar_ocorrencias():
     n = len(copia_lista)
     
     
-    for i in range(n):
-        for j in range(0, n - i - 1):
-            if copia_lista[j]["id"] > copia_lista[j+1]["id"]:
+    for i in range(1, n):
+        for i in range(1, n):
+            variavel_chave = copia_lista[i]
+            j = i - 1
+            
+            while j >= 0 and copia_lista[j]["id"] > variavel_chave["id"]:
+                copia_lista[j + 1] = copia_lista[j]
+                j -= 1
                 
-                copia_lista[j], copia_lista[j+1] = copia_lista[j+1], copia_lista[j]
+            copia_lista[j + 1] = variavel_chave
                 
     print(" Chamados ordenados por ID:")
     for occ in copia_lista:
@@ -144,3 +152,63 @@ def desfazer_ultima_acao():
     
     ultima_acao = registro_pilha_historico.pop()
     print(f" Ação removida: \"{ultima_acao}\"")
+    
+    
+def salvar_dados_txt():
+    print("\nSALVANDO DADOS EM ARQUIVO .TXT")
+    try:
+        with open(Arquivo_dados_txt, "w", encoding="utf-8") as arquivo:
+            for occ in lista_geral:
+                linha = f"{occ['id']};{occ['solicitante']};{occ['tipo']};{occ['descricao']};{occ['prioridade']};{occ['status']};{occ['data']}\n"
+                arquivo.write(linha)
+        print(f"Sucesso: {len(lista_geral)} ocorrência(s) salva(s)'{Arquivo_dados_txt}'.")
+    except Exception as e:
+        print(f"Erro ao salvar o arquivo: {e}") 
+        
+def carregar_dados_txt():
+    print("\nCARREGANDO DADOS DO ARQUIVO")
+    if not os.path.exists(Arquivo_dados_txt):
+        print(f"O arquivo '{Arquivo_dados_txt}' ainda não existe. Nenhum dado foi carregado.")
+        return
+
+    try:
+        
+        lista_geral.clear()
+        insercao_fila_chegada.clear()
+        for lista in tabela_hash_tipo:
+            lista.clear()
+
+        with open(Arquivo_dados_txt, "r", encoding="utf-8") as arquivo:
+            for linha in arquivo:
+                linha = linha.strip()
+                if not linha:
+                    continue
+                
+                
+                partes = linha.split(";")
+                
+                ocorrencia = {
+                    "id": int(partes[0]),
+                    "solicitante": partes[1],
+                    "tipo": partes[2],
+                    "descricao": partes[3],
+                    "prioridade": int(partes[4]),
+                    "status": partes[5],
+                    "data": partes[6]
+                }
+                
+                
+                lista_geral.append(ocorrencia)
+                
+                
+                if ocorrencia["status"] == "Aberto":
+                    insercao_fila_chegada.append(ocorrencia)
+                
+                
+                indice_hash = calcular_hash(ocorrencia["tipo"])
+                tabela_hash_tipo[indice_hash].append(ocorrencia)
+                
+        print(f"Sucesso: {len(lista_geral)} ocorrência(s) carregada(s)!")
+    except Exception as e:
+        print(f"Erro ao carregar o arquivo: {e}")        
+    

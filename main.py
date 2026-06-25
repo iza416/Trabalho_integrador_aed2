@@ -12,8 +12,9 @@ def executar_sistema():
         print("5. Ordenar Ocorrências por ID")
         print("6. Ver Histórico de Ações")
         print("7. Desfazer Última Ação")
+        print("8. Carregar Dados em um Arquivo")
+        print("9. Salvar Dados em um arquivo")
         print("0. Sair")
-        print("="*50)
         
         opcao = input("Escolha uma opção: ")
         
@@ -24,6 +25,8 @@ def executar_sistema():
         elif opcao == "5": sistema_ti.ordenar_ocorrencias()
         elif opcao == "6": sistema_ti.historico_pilha()
         elif opcao == "7": sistema_ti.desfazer_ultima_acao()
+        elif opcao == "8": sistema_ti.carregar_dados_txt()
+        elif opcao == "9": sistema_ti.salvar_dados_txt()
         elif opcao == "0":
             print("Encerrando o sistema...")
             break

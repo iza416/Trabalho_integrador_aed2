@@ -1,0 +1,2 @@
+1;Maria;projetor;projetor sem funcionar;3;Aberto;25/06/2026
+2;Iza;computador;computador com barulho estranho;2;Aberto;25/06/2026
