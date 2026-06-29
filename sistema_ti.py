@@ -212,3 +212,39 @@ def carregar_dados_txt():
     except Exception as e:
         print(f"Erro ao carregar o arquivo: {e}")        
     
+def gerar_relatorio_ordenado():
+    print("\nGERANDO RELATÓRIO...")
+
+    if not lista_geral:
+        print("Nenhuma ocorrência cadastrada.")
+        return
+
+    copia_lista = list(lista_geral)
+
+    n = len(copia_lista)
+
+    for i in range(1, n):
+        chave = copia_lista[i]
+        j = i - 1
+
+        while j >= 0 and copia_lista[j]["id"] > chave["id"]:
+            copia_lista[j + 1] = copia_lista[j]
+            j -= 1
+
+        copia_lista[j + 1] = chave
+
+    with open("relatorio_final.txt", "w", encoding="utf-8") as arquivo:
+        arquivo.write("RELATÓRIO DE OCORRÊNCIAS\n")
+        arquivo.write("=" * 60 + "\n\n")
+
+        for occ in copia_lista:
+            arquivo.write(f"ID: {occ['id']}\n")
+            arquivo.write(f"Solicitante: {occ['solicitante']}\n")
+            arquivo.write(f"Tipo: {occ['tipo']}\n")
+            arquivo.write(f"Descrição: {occ['descricao']}\n")
+            arquivo.write(f"Prioridade: {occ['prioridade']}\n")
+            arquivo.write(f"Status: {occ['status']}\n")
+            arquivo.write(f"Data: {occ['data']}\n")
+            arquivo.write("-" * 60 + "\n")
+
+    print("Relatório gerado com sucesso em 'relatorio_final.txt'.")

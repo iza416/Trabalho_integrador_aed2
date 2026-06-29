@@ -1,0 +1,19 @@
+RELATÓRIO DE OCORRÊNCIAS
+============================================================
+
+ID: 1
+Solicitante: Maria
+Tipo: projetor
+Descrição: projetor sem funcionar
+Prioridade: 3
+Status: Aberto
+Data: 25/06/2026
+------------------------------------------------------------
+ID: 2
+Solicitante: Iza
+Tipo: computador
+Descrição: computador com barulho estranho
+Prioridade: 2
+Status: Aberto
+Data: 25/06/2026
+------------------------------------------------------------

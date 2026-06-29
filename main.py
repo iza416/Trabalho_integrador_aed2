@@ -27,8 +27,9 @@ def executar_sistema():
         elif opcao == "7": sistema_ti.desfazer_ultima_acao()
         elif opcao == "8": sistema_ti.carregar_dados_txt()
         elif opcao == "9": sistema_ti.salvar_dados_txt()
-        elif opcao == "0":
-            print("Encerrando o sistema...")
+        elif opcao == "0": 
+            print("Encerrando o sistema e gerando o relatório...")
+            sistema_ti.gerar_relatorio_ordenado()
             break
         else:
             print("Opção inválida!")
