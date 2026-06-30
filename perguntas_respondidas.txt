@@ -1,0 +1,43 @@
+Onde foi usada a fila?
+Foi usada na lista insercao_fila_chegada. Ela funciona como fila na função ordem_chegada, no momento que o primeiro elemento a entrar é o primeiro a ser removido utilizando o método insercao_fila_chegada.pop. 
+
+Onde foi usada a pilha?
+Foi usada na lista registro_pilha_historico. Ela gerencia as seguintes funções do nosso  sistema: 
+  Cadastro e atendimento, novas ações são adicionadas ao final com .append().
+ Na função desfazer_ultima_acao(), o último elemento inserido é o primeiro a ser removido usando .pop().
+
+Onde foi usada a árvore?
+Não utilizamos
+
+Onde foi usada a heap?
+Como não estava dentro dos termos obrigatórios na listagem passada pelo professor, também não utilizamos.
+
+Onde foi usada a hash table?
+Foi usada na  tabela_hash_tipo. No código implementamos uma tabela hash tratamento por encadeamento, utilizamos índice de tamanho 10. A função calcular_hash(tipo_string) calcula o índice usando o resto da divisão (% 10). 
+
+Qual algoritmo de ordenação foi implementado?
+Inicialmente (no primeiro commit) utilizei o Bubble Sort, mas, após analisarmos o que foi explicado pelo professor em aula, concluímos que o Insertion Sort seria uma alternativa mais eficiente para o projeto.
+O Insertion Sort funciona inserindo cada elemento na posição correta da parte da lista que já está ordenada. Para isso, uma variável é utilizada como chave e os elementos anteriores que possuem valor maior são deslocados uma posição para a direita até que seja encontrada a posição correta para a inserção. Essa lógica pode ser observada no trecho:
+
+while j >= 0 and copia_lista[j]["id"] > variavel_chave["id"]
+Esse algoritmo foi implementado na função ordenar_ocorrencias(), permitindo exibir as ocorrências ordenadas por ID, e também foi reutilizado na função gerar_relatorio_ordenado(), garantindo que o relatório gerado ao encerrar o sistema seja salvo com todas as ocorrências organizadas em ordem crescente de ID.
+
+Qual estrutura foi mais adequada para busca rápida?
+A Hash Table. Que nos permitiu organizar as ocorrências direto pelo tipo, reduzindo o tempo se tivéssemos que “ver” a lista geral inteira, elemento por elemento. 
+
+Qual estrutura foi mais adequada para atendimento por prioridade?
+Nós utilizamos uma fila comum por ordem de chegada. 
+
+Qual foi a maior dificuldade do grupo? 
+Acredito que alguns pontos, como organização do grupo, já que durante essas últimas semanas estávamos com bastante trabalhos e não conseguiríamos nos reunir, 
+então preferimos cada um fazer o básico e depois escolher de qual usaríamos.
+
+A forma que escolhemos de nos organizar foi essa e utilizamos algumas coisas para ficar mais claro do que foi feito, por exemplo, no primeiro commit utilizei comentários para o colega entender o que eu tinha pensado. 
+Em conversa definimos alguns ajustes para fazer depois desse primeiro commit. 
+
+Também posso citar aqui a questão do algoritmo de ordenação, primeiramente foi utilizado Bubble sort, mas em conversa com a dupla foi definido que utilizássemos outro, pois essa não seria a melhor opção. 
+Então teve um tempo de pesquisa de como implementar o Insertion Sort. 
+
+Também tentamos implementar uma árvore AVL para armazenar e organizar as ocorrências. No entanto, encontramos dificuldades para adaptar todo o sistema para operar sobre essa estrutura, já que grande parte das 
+funcionalidades, como cadastro, ordenação, listagem e busca, precisariam ser reestruturadas para utilizar a árvore de forma consistente. Como o projeto já estava em uma fase avançada e havia limitações de tempo, 
+optamos por manter as estruturas de dados que já estavam funcionando corretamente e que atendiam aos requisitos propostos.
